@@ -6,6 +6,7 @@ import RootPage from 'pages/root/Root'
 import Transfer from 'pages/transfer/Transfer'
 import Transfers from 'pages/transfer/Transfers'
 import ErrorPage from 'pages/ErrorPage'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const container = document.getElementById('root') as HTMLDivElement
 const root = createRoot(container)
@@ -35,4 +36,10 @@ const router = createBrowserRouter([
   }
 ])
 
-root.render(<RouterProvider router={router} />)
+const queryClient = new QueryClient()
+
+root.render(
+  <QueryClientProvider client={queryClient}>
+    <RouterProvider router={router} />
+  </QueryClientProvider>
+)

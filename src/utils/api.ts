@@ -6,7 +6,7 @@ const gatewayBaseUrlMap = {
   flutterwave: import.meta.env.VITE_FLUTTERWAVE_API_URL
 }
 
-export const api = (gateway: GATEWAY_ENUM) => {
+export const api = (gateway: GATEWAY_ENUM = GATEWAY_ENUM.MONNIFY) => {
   const axiosInstance = axios.create({
     baseURL: gatewayBaseUrlMap[gateway],
     headers: {
