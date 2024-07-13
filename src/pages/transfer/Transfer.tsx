@@ -4,9 +4,11 @@ import { generateTransactionRef } from 'utils'
 import {
   useBanks,
   useCreateTransfer,
-  useAuthorizeTransfer
+  useAuthorizeTransfer,
+  useValidateBank
 } from 'utils/actions'
 import { Transfer as TransferType } from 'utils/types'
+import clsx from 'clsx'
 
 type TransferProps = {}
 const sourceAccountNumber = import.meta.env.VITE_MONNIFY_WALLET_ACCOUNT_NUMBER
@@ -19,6 +21,7 @@ const Transfer = ({}: TransferProps) => {
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors }
   } = useForm<TransferType>()
 
@@ -35,6 +38,14 @@ const Transfer = ({}: TransferProps) => {
   const mutation = useCreateTransfer()
   const authorizeMutation = useAuthorizeTransfer()
   const { data, isLoading, error } = useBanks()
+  const destinationBankCode = watch('destinationBankCode')
+  const destinationAccountNumber = watch('destinationAccountNumber')
+
+  const { data: validationData, isLoading: isValidationDataLoading } =
+    useValidateBank({
+      bankCode: destinationBankCode,
+      accountNumber: destinationAccountNumber
+    })
 
   const onSubmit: SubmitHandler<TransferType> = (data) => {
     mutation.mutate(
@@ -166,11 +177,17 @@ const Transfer = ({}: TransferProps) => {
               }
             }}
             render={({ field }) => (
-              <input
-                type="text"
-                {...field}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              />
+              <>
+                <input
+                  type="text"
+                  {...field}
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+                <span className="text-blue-950">
+                  {validationData?.requestSuccessful &&
+                    validationData?.responseBody?.accountName}
+                </span>
+              </>
             )}
           />
           {errors.destinationAccountNumber && (
@@ -206,7 +223,18 @@ const Transfer = ({}: TransferProps) => {
 
         <button
           type="submit"
-          className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className={clsx(
+            'inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2',
+            {
+              'bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500':
+                !isValidationDataLoading && validationData?.requestSuccessful,
+              'bg-gray-400 cursor-not-allowed opacity-50':
+                isValidationDataLoading || !validationData?.requestSuccessful
+            }
+          )}
+          disabled={
+            isValidationDataLoading || !validationData?.requestSuccessful
+          }
         >
           Submit
         </button>

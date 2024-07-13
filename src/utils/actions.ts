@@ -161,13 +161,13 @@ export const useAuthorizeTransfer = () => {
   })
 }
 
-export const useValidateBank = (bankValidationParams: BankValidationParams) => {
+export const useValidateBank = ({
+  accountNumber,
+  bankCode
+}: BankValidationParams) => {
   return useQuery({
-    queryKey: [
-      VALIDATE_BANK_URL,
-      bankValidationParams?.accountNumber,
-      bankValidationParams?.bankCode
-    ],
-    queryFn: () => validateBankApi(bankValidationParams)
+    queryKey: [VALIDATE_BANK_URL, accountNumber, bankCode],
+    queryFn: () => validateBankApi({ accountNumber, bankCode }),
+    enabled: !!accountNumber && !!bankCode && accountNumber?.length === 10
   })
 }
