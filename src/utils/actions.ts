@@ -7,6 +7,7 @@ export const CREATE_TRANSFER_URL = 'api/v2/disbursements/single'
 export const GET_BANKS_URL = 'api/v1/sdk/transactions/banks'
 export const AUTHORIZE_TRANSFER_URL = 'api/v2/disbursements/single/validate-otp'
 export const VALIDATE_BANK_URL = 'api/v1/disbursements/account/validate'
+export const WALLET_BALANCE_URL = 'api/v1/disbursements/wallet/balance'
 
 interface PaginationParams {
   pageNo?: number
@@ -16,6 +17,17 @@ interface PaginationParams {
 interface BankValidationParams {
   accountNumber: string
   bankCode: string
+}
+
+export interface BankValidationResponse {
+  requestSuccessful: boolean
+  responseMessage: string
+  responseCode: string
+  responseBody: {
+    accountNumber: string
+    accountName: string
+    bankCode: string
+  }
 }
 
 export const createTransferApi = async (
@@ -110,19 +122,35 @@ export const authorizeTransferApi = async (authorizationData: {
 
 export const validateBankApi = async (
   bankValidationParams: BankValidationParams
+): Promise<BankValidationResponse> => {
+  try {
+    const response = await api().get(VALIDATE_BANK_URL, {
+      params: bankValidationParams
+    })
+    console.log('got here>>>>>>')
+    return response.data
+  } catch (error) {
+    console.log('got here error>>>>>>')
+    throw error
+  }
+}
+
+export const getWalletBalanceApi = async (
+  accountNumber: string
 ): Promise<{
   requestSuccessful: boolean
   responseMessage: string
   responseCode: string
   responseBody: {
-    accountNumber: string
-    accountName: string
-    bankCode: string
+    availableBalance: number
+    ledgerBalance: number
   }
 }> => {
   try {
-    const response = await api().get(VALIDATE_BANK_URL, {
-      params: bankValidationParams
+    const response = await api().get(WALLET_BALANCE_URL, {
+      params: {
+        accountNumber
+      }
     })
     return response.data
   } catch (error) {
@@ -169,5 +197,13 @@ export const useValidateBank = ({
     queryKey: [VALIDATE_BANK_URL, accountNumber, bankCode],
     queryFn: () => validateBankApi({ accountNumber, bankCode }),
     enabled: !!accountNumber && !!bankCode && accountNumber?.length === 10
+  })
+}
+
+export const useWalletBalance = (accountNumber: string) => {
+  return useQuery({
+    queryKey: [WALLET_BALANCE_URL, accountNumber],
+    queryFn: () => getWalletBalanceApi(accountNumber),
+    enabled: !!accountNumber
   })
 }

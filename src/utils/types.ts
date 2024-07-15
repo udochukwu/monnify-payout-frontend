@@ -3,6 +3,12 @@ export enum GATEWAY_ENUM {
   FLUTTERWAVE = 'flutterwave'
 }
 
+export enum TRANSFER_STATUS_ENUM {
+  EXPIRED = 'EXPIRED',
+  SUCCESS = 'SUCCESS',
+  PENDING_AUTHORIZATION = 'PENDING_AUTHORIZATION'
+}
+
 export type Bank = {
   name: string
   code: string
@@ -24,7 +30,7 @@ export type Transfer = {
   narration: string
   reference: string
   sourceAccountNumber: string
-  status: string
+  status: TRANSFER_STATUS_ENUM
   transactionDescription: string
   transactionReference: string
   twoFaEnabled: boolean
