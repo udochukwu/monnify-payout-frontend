@@ -1,3 +1,4 @@
+import InputError from 'components/InputError'
 import Label from 'components/Label'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -17,7 +18,7 @@ const NarrationField: React.FC = () => {
         control={control}
         rules={{ required: 'Narration is required' }}
         render={({ field }) => (
-          <div className="w-full rounded border border-gray-200  focus-within:border-blue-100 p-4 h-24 flex flex-col justify-between">
+          <div className="w-full rounded border border-gray-200  focus-within:border-indigo-100 p-4 h-24 flex flex-col justify-between">
             <Label htmlFor="narration" className="mb-1">
               Narration
             </Label>
@@ -32,9 +33,7 @@ const NarrationField: React.FC = () => {
               className="focus:outline-none w-full  p-0 focus:ring-0 border-none text-sm   text-gray-900 bg-transparent"
             />
             {errors.narration && (
-              <span className="text-red-400 text-xs">
-                {errors.narration.message}
-              </span>
+              <InputError>{errors.narration.message}</InputError>
             )}
           </div>
         )}

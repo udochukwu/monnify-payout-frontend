@@ -1,3 +1,4 @@
+import InputError from 'components/InputError'
 import Label from 'components/Label'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Transfer } from 'utils/types'
@@ -28,7 +29,7 @@ const DestinationAccountField = ({
           }
         }}
         render={({ field }) => (
-          <div className="w-full rounded border border-gray-200  focus-within:border-blue-100 p-4 h-24 flex flex-col justify-between">
+          <div className="w-full rounded border border-gray-200  focus-within:border-indigo-100 p-4 h-24 flex flex-col justify-between">
             <Label htmlFor="destinationAccountNumber" className="mb-1">
               Destination Account Number
             </Label>
@@ -46,13 +47,13 @@ const DestinationAccountField = ({
             />
 
             {!!accountName && (
-              <span className="text-blue-400 text-xs mt-2">{accountName} </span>
+              <span className="text-indigo-400 text-[10px] mt-2 font-bold tracking-widest">
+                {accountName}{' '}
+              </span>
             )}
 
             {errors.destinationAccountNumber && (
-              <span className="text-red-400 text-xs">
-                {errors.destinationAccountNumber.message}
-              </span>
+              <InputError>{errors.destinationAccountNumber.message}</InputError>
             )}
           </div>
         )}

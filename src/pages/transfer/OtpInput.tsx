@@ -49,7 +49,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ length = 6, value, onChange }) => {
           key={index}
           type="text"
           maxLength={1}
-          className="w-10 h-10 sm:w-12 sm:h-12 text-center text-xl border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-10 h-10 sm:w-12 sm:h-12 text-center text-xl border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500"
           value={data}
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             handleChange(e.target, index)

@@ -1,3 +1,4 @@
+import InputError from 'components/InputError'
 import Label from 'components/Label'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -19,7 +20,7 @@ const DestinationBankField: React.FC = () => {
         control={control}
         rules={{ required: 'Destination bank code is required' }}
         render={({ field }) => (
-          <div className="w-full rounded border border-gray-200  focus-within:border-blue-100 p-4 h-24 flex flex-col justify-between">
+          <div className="w-full rounded border border-gray-200  focus-within:border-indigo-100 p-4 h-24 flex flex-col justify-between">
             <Label htmlFor="destinationBankCode" className="mb-1">
               Destination Bank
             </Label>
@@ -55,9 +56,7 @@ const DestinationBankField: React.FC = () => {
               </div>
             </div>
             {errors.destinationBankCode && (
-              <span className="text-red-400 text-xs">
-                {errors.destinationBankCode.message}
-              </span>
+              <InputError>{errors.destinationBankCode.message}</InputError>
             )}
           </div>
         )}

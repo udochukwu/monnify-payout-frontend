@@ -12,6 +12,8 @@ import { formatAmount } from 'utils'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import InputError from 'components/InputError'
+import Button from 'components/Button'
 interface AuthorizationFormProps {
   transferResponse: CreateTransferResponse
   onSuccess: (result: any) => void
@@ -40,7 +42,6 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
     },
     mode: 'onBlur'
   })
-
 
   const { data: bankValidationData } = useValidateBank({
     bankCode: transferResponse?.responseBody?.destinationBankCode,
@@ -122,14 +123,14 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
                 }}
               />
               {error && (
-                <p className="text-red-500 text-sm mt-1">{error.message}</p>
+                <InputError className="mt-1">{error.message}</InputError>
               )}
             </>
           )}
         />
       </div>
 
-      <div className="flex gap-2 sm:!mt-10">
+      {/* <div className="flex gap-2 sm:!mt-10">
         <button
           type="submit"
           className={clsx(
@@ -152,11 +153,22 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         >
           Authorize
         </button>
+      </div> */}
+      <div className="flex gap-2 sm:!mt-10">
+        <Button appearance="outline" onClick={() => navigate('/')}>
+          Cancel
+        </Button>
+        <Button appearance="solid" type="submit" disabled={!isValid}>
+          Authorize
+        </Button>
       </div>
-
       <p>
         Didn't recieve code?{' '}
-        <button type='button' className="underline text-blue-600" onClick={resendOtp}>
+        <button
+          type="button"
+          className="underline text-blue-600"
+          onClick={resendOtp}
+        >
           Request again
         </button>
       </p>

@@ -10,22 +10,22 @@ const TransferPage = () => {
   const queryClient = useQueryClient()
   const [transferResponse, setTransferResponse] =
     useState<CreateTransferResponse | null>(
-      null
-      // {
-      //   requestSuccessful: true,
-      //   responseMessage: 'success',
-      //   responseCode: '0',
-      //   responseBody: {
-      //     amount: 2000,
-      //     reference: 'VEND14224071514284144924935V927TR',
-      //     status: 'PENDING_AUTHORIZATION',
-      //     dateCreated: '2024-07-15T13:28:42.059+00:00',
-      //     totalFee: 35.0,
-      //     destinationBankName: 'United Bank For Africa Plc',
-      //     destinationAccountNumber: '2063594735',
-      //     destinationBankCode: '033'
-      //   }
-      // }
+      // null
+      {
+        requestSuccessful: true,
+        responseMessage: 'success',
+        responseCode: '0',
+        responseBody: {
+          amount: 2000,
+          reference: 'VEND14224071514284144924935V927TR',
+          status: 'PENDING_AUTHORIZATION',
+          dateCreated: '2024-07-15T13:28:42.059+00:00',
+          totalFee: 35.0,
+          destinationBankName: 'United Bank For Africa Plc',
+          destinationAccountNumber: '2063594735',
+          destinationBankCode: '033'
+        }
+      }
     )
 
   const handleTransferSuccess = (response: CreateTransferResponse) => {
@@ -71,7 +71,7 @@ const TransferPage = () => {
               </svg>
             </i>
           </span>
-          <p className="text-blue-400">Quick Transfer</p>
+          <p className="text-indigo-400">Quick Transfer</p>
         </div>
       </div>
       {!transferResponse ? (
