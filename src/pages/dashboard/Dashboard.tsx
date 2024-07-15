@@ -16,7 +16,7 @@ function Dashboard() {
         Dashboard
       </h1>
 
-      <div className="flex gap-4 font-urbanist flex-col sm:flex-row mb-10 sm:mb-14">
+      <div className="flex gap-4 font-urbanist flex-col sm:flex-row mb-14 sm:mb-14">
         <div className="w-full bg-white dark:bg-darkblack-600 px-7 py-11 rounded shadow-lg flex gap-3 lg:w-1/2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
