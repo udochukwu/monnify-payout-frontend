@@ -17,7 +17,7 @@ const Transfers = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-2xl mb-3 font-urbanist">
+      <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl mb-3 font-urbanist">
         Recent Transfers
       </h1>
 

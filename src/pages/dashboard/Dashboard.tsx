@@ -12,11 +12,11 @@ function Dashboard() {
 
   return (
     <div className="relative overflow-hidden p-3 pb-10">
-      <h1 className="text-2xl font-bold tracking-wide text-gray-700 sm:text-2xl mb-4 font-urbanist">
+      <h1 className="text-xl font-bold tracking-wide text-gray-700 sm:text-2xl mb-4 font-urbanist">
         Dashboard
       </h1>
 
-      <div className="flex gap-4 font-urbanist flex-col sm:flex-row mb-4 sm:mb-14">
+      <div className="flex gap-4 font-urbanist flex-col sm:flex-row mb-10 sm:mb-14">
         <div className="w-full bg-white dark:bg-darkblack-600 px-7 py-11 rounded shadow-lg flex gap-3 lg:w-1/2">
           <svg
             xmlns="http://www.w3.org/2000/svg"

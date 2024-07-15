@@ -84,7 +84,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
   }
   return (
     <form onSubmit={handleSubmit(onAuthorizeSubmit)} className="space-y-4 mt-8">
-      <h2 className="text-4xl text-gray-900 sm:text-3xl font-bold tracking-normal">
+      <h2 className="text-3xl text-gray-700 sm:text-3xl font-bold tracking-normal">
         Authorize transfer
       </h2>
 
@@ -130,30 +130,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         />
       </div>
 
-      {/* <div className="flex gap-2 sm:!mt-10">
-        <button
-          type="submit"
-          className={clsx(
-            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500  w-full sm:w-60'
-          )}
-          onClick={() => navigate('/')}
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className={clsx(
-            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 w-full sm:w-60',
-            {
-              '': !isValid,
-              'cursor-not-allowed opacity-50': !isValid
-            }
-          )}
-          disabled={!isValid}
-        >
-          Authorize
-        </button>
-      </div> */}
+
       <div className="flex gap-2 sm:!mt-10">
         <Button appearance="outline" onClick={() => navigate('/')} color='red'>
           Cancel
