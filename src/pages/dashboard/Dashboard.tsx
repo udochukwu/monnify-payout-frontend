@@ -6,18 +6,18 @@ import { formatAmount } from 'utils'
 import Transfers from 'pages/transfer/Transfers'
 
 function Dashboard() {
-  const { data } = useWalletBalance(
+  const { data, isLoading } = useWalletBalance(
     import.meta.env.VITE_MONNIFY_WALLET_ACCOUNT_NUMBER
   )
 
   return (
     <div className="relative overflow-hidden p-3 pb-10">
-      <h1 className="text-xl font-bold tracking-wide text-gray-700 sm:text-2xl mb-4 font-urbanist">
+      <h1 className="text-xl font-bold tracking-wide text-gray-700 dark:text-white sm:text-2xl mb-4 font-urbanist">
         Dashboard
       </h1>
 
       <div className="flex gap-4 font-urbanist flex-col sm:flex-row mb-14 sm:mb-14">
-        <div className="w-full bg-white dark:bg-darkblack-600 px-7 py-11 rounded shadow-lg flex gap-3 lg:w-1/2">
+        <div className="w-full bg-white dark:bg-[#1D1E24] px-7 py-11 rounded shadow-lg flex gap-3 lg:w-1/2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="58"
@@ -105,10 +105,10 @@ function Dashboard() {
           </svg>
           <div>
             {' '}
-            <p className="text-gray-500 tracking-widest text-sm">
+            <p className="text-gray-500 dark:text-gray-400 tracking-widest text-sm">
               Available Balance
             </p>
-            <h4 className="font-bold text-2xl">
+            <h4 className="font-bold text-2xl text-gray-800 dark:text-white">
               {data?.responseBody?.availableBalance
                 ? formatAmount(data?.responseBody?.availableBalance)
                 : formatAmount(0)}

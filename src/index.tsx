@@ -2,13 +2,14 @@ import { createRoot } from 'react-dom/client'
 import 'tailwindcss/tailwind.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Dashboard from 'pages/dashboard/Dashboard'
-import RootPage from 'pages/root/Root'
+import RootPage from 'pages/layout/RootLayout'
 import Transfer from 'pages/transfer/Transfer'
 import Transfers from 'pages/transfer/Transfers'
 import ErrorPage from 'pages/ErrorPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ToastContainer, Zoom } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { ThemeProvider } from 'pages/layout/ThemeProvider'
 
 const container = document.getElementById('root') as HTMLDivElement
 const root = createRoot(container)
@@ -37,7 +38,10 @@ const queryClient = new QueryClient()
 
 root.render(
   <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
+
     <ToastContainer
       // hideProgressBar
       autoClose={5000}

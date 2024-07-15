@@ -6,8 +6,12 @@ export default {
     extend: {
       fontFamily: {
         urbanist: ['"Urbanist"']
+      },
+      colors: {
+        dark: '#1D1E24'
       }
     }
   },
+  darkMode: 'class',
   plugins: []
 }

@@ -29,7 +29,7 @@ const DestinationAccountField = ({
           }
         }}
         render={({ field }) => (
-          <div className="w-full rounded border border-gray-200  focus-within:border-blue-100 p-4 h-24 flex flex-col justify-between">
+          <div className="w-full rounded border border-gray-200 dark:border-gray-700  focus-within:border-blue-200 p-4 h-24 flex flex-col justify-between">
             <Label htmlFor="destinationAccountNumber" className="mb-1">
               Destination Account Number
             </Label>

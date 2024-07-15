@@ -69,20 +69,18 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
           accountName={bankValidationData?.responseBody?.accountName}
         />
         <NarrationField />
-        <button
-          type="submit"
-          className={clsx(
-            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 sm:!mt-10 w-full sm:w-auto',
-            {
-              '': !isDisabled,
-              'cursor-not-allowed opacity-50': isDisabled
-            }
-          )}
-          disabled={isDisabled}
-        >
-          Make Transfer
-        </button>
-        <Button>Make Transfer</Button>
+        <div className="flex gap-1 justify-between">
+          <Button type="button" appearance="outline" color="red">
+            Cancel
+          </Button>
+          <Button
+            type="submit"
+            disabled={isDisabled}
+            loading={mutation?.status === 'pending'}
+          >
+            Continue
+          </Button>
+        </div>
       </form>
     </FormProvider>
   )

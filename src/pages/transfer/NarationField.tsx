@@ -18,7 +18,7 @@ const NarrationField: React.FC = () => {
         control={control}
         rules={{ required: 'Narration is required' }}
         render={({ field }) => (
-          <div className="w-full rounded border border-gray-200  focus-within:border-blue-100 p-4 h-24 flex flex-col justify-between">
+          <div className="w-full rounded border border-gray-200 dark:border-gray-700  focus-within:border-blue-200 p-4 h-24 flex flex-col justify-between">
             <Label htmlFor="narration" className="mb-1">
               Narration
             </Label>
@@ -30,7 +30,7 @@ const NarrationField: React.FC = () => {
                 field.onChange(e)
                 clearErrors('narration')
               }}
-              className="focus:outline-none w-full  p-0 focus:ring-0 border-none text-sm   text-gray-900 bg-transparent"
+              className="focus:outline-none w-full  p-0 focus:ring-0 border-none text-sm   text-gray-900  dark:text-white bg-transparent"
             />
             {errors.narration && (
               <InputError>{errors.narration.message}</InputError>

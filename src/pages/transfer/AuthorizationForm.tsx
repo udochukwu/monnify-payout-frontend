@@ -35,6 +35,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
     control,
     handleSubmit,
     clearErrors,
+    setValue,
     formState: { errors, isValid }
   } = useForm<AuthorizationData>({
     defaultValues: {
@@ -64,8 +65,8 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
           navigate('/')
         },
         onError: (error) => {
-          console.error('Error authorizing transfer:', error)
           toast?.error(error?.message)
+          setValue('authorizationCode', '')
         }
       }
     )
@@ -130,12 +131,16 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         />
       </div>
 
-
       <div className="flex gap-2 sm:!mt-10">
-        <Button appearance="outline" onClick={() => navigate('/')} color='red'>
+        <Button appearance="outline" onClick={() => navigate('/')} color="red">
           Cancel
         </Button>
-        <Button appearance="solid" type="submit" disabled={!isValid}>
+        <Button
+          appearance="solid"
+          type="submit"
+          disabled={!isValid}
+          loading={authorizeMutation?.status === 'pending'}
+        >
           Authorize
         </Button>
       </div>
