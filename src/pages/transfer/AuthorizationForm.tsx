@@ -134,7 +134,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         <button
           type="submit"
           className={clsx(
-            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500  w-full sm:w-60'
+            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500  w-full sm:w-60'
           )}
           onClick={() => navigate('/')}
         >
@@ -143,7 +143,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         <button
           type="submit"
           className={clsx(
-            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 w-full sm:w-60',
+            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 w-full sm:w-60',
             {
               '': !isValid,
               'cursor-not-allowed opacity-50': !isValid
@@ -155,7 +155,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         </button>
       </div> */}
       <div className="flex gap-2 sm:!mt-10">
-        <Button appearance="outline" onClick={() => navigate('/')}>
+        <Button appearance="outline" onClick={() => navigate('/')} color='red'>
           Cancel
         </Button>
         <Button appearance="solid" type="submit" disabled={!isValid}>

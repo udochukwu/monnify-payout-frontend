@@ -71,7 +71,7 @@ const TransferPage = () => {
               </svg>
             </i>
           </span>
-          <p className="text-indigo-400">Quick Transfer</p>
+          <p className="text-blue-400">Quick Transfer</p>
         </div>
       </div>
       {!transferResponse ? (

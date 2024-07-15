@@ -18,7 +18,7 @@ const AmountField: React.FC = () => {
         control={control}
         rules={{ required: 'Amount is required', min: 1 }}
         render={({ field }) => (
-          <div className="w-full rounded border border-gray-200  focus-within:border-indigo-100 p-4 h-24 flex flex-col justify-between">
+          <div className="w-full rounded border border-gray-200  focus-within:border-blue-100 p-4 h-24 flex flex-col justify-between">
             <Label htmlFor="amount" className="mb-1">
               Enter amount
             </Label>
