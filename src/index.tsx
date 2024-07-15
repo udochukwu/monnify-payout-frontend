@@ -7,6 +7,8 @@ import Transfer from 'pages/transfer/Transfer'
 import Transfers from 'pages/transfer/Transfers'
 import ErrorPage from 'pages/ErrorPage'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ToastContainer, Zoom } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const container = document.getElementById('root') as HTMLDivElement
 const root = createRoot(container)
@@ -26,11 +28,6 @@ const router = createBrowserRouter([
         id: 'transfer',
         path: 'transfer',
         element: <Transfer />
-      },
-      {
-        id: 'transfers',
-        path: 'transfers',
-        element: <Transfers />
       }
     ]
   }
@@ -41,5 +38,12 @@ const queryClient = new QueryClient()
 root.render(
   <QueryClientProvider client={queryClient}>
     <RouterProvider router={router} />
+    <ToastContainer
+      // hideProgressBar
+      autoClose={5000}
+      theme="colored"
+      position="top-center"
+      transition={Zoom}
+    />
   </QueryClientProvider>
 )

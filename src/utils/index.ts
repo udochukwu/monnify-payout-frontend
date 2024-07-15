@@ -29,3 +29,12 @@ export const generateTransactionRef = (): string => {
 
   return `${prefix}${year}${month}${day}${hour}${minute}${second}${millisecond}${randomDigits}${suffix}`
 }
+
+export const apiErrorHandler = (error: any, errorMessage?: string) => {
+  const serverErrorMessage = error?.response?.data?.responseMessage
+
+  if (serverErrorMessage) {
+    throw new Error(serverErrorMessage)
+  }
+  throw new Error(errorMessage || 'An unexpected error occurred')
+}

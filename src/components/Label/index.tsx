@@ -9,7 +9,7 @@ const Label = ({ children, className, ...rest }: LabelProps) => {
   return (
     <label
       className={clsx(
-        'text-xs text-gray-600 font-light tracking-wide',
+        'text-xs text-gray-600  tracking-wider',
         className
       )}
       {...rest}

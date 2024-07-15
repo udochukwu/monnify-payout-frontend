@@ -8,6 +8,7 @@ import { generateTransactionRef } from 'utils'
 import { Transfer } from 'utils/types'
 import DestinationBankField from './DestinationBank'
 import NarrationField from './NarationField'
+import { toast } from 'react-toastify'
 
 interface TransferFormProps {
   onSuccess: (result: any) => void
@@ -47,7 +48,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
           onSuccess(result)
         },
         onError: (error) => {
-          console.error('Error creating transfer:', error)
+          toast?.error(error?.message)
         }
       }
     )
@@ -70,10 +71,9 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
         <button
           type="submit"
           className={clsx(
-            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 sm:!mt-10 w-full sm:w-auto',
+            'justify-center px-4 border border-transparent shadow-sm text-sm font-medium rounded text-white focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 sm:!mt-10 w-full sm:w-auto',
             {
-              '':
-                !isDisabled,
+              '': !isDisabled,
               'cursor-not-allowed opacity-50': isDisabled
             }
           )}
