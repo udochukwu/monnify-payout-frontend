@@ -73,7 +73,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
   const resendOtp = () => {
     resendOtpMutation.mutate(transferResponse?.responseBody?.reference, {
       onSuccess: (result) => {
-        toast?.error(result?.responseBody?.message)
+        toast?.success(result?.responseBody?.message)
       },
       onError: (error) => {
         toast?.error(error?.message)
@@ -156,7 +156,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
 
       <p>
         Didn't recieve code?{' '}
-        <button className="underline text-blue-600" onClick={resendOtp}>
+        <button type='button' className="underline text-blue-600" onClick={resendOtp}>
           Request again
         </button>
       </p>
