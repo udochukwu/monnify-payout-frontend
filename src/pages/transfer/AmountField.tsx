@@ -1,5 +1,6 @@
 import InputError from 'components/InputError';
 import Label from 'components/Label';
+import Input from 'components/TextInput';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { Transfer } from 'utils/types';
@@ -24,7 +25,7 @@ const AmountField: React.FC = () => {
             </Label>
             <div className="w-full h-[35px] flex justify-between items-center mb-1">
               <span className="text-2xl text-gray-900 dark:text-white font-bold mr-1">₦</span>
-              <input
+              <Input
                 type="text"
                 {...field}
                 id="amount"
@@ -34,7 +35,7 @@ const AmountField: React.FC = () => {
                   field.onChange(value);
                   clearErrors('amount');
                 }}
-                className="focus:outline-none w-full p-0 focus:ring-0 border-none text-2xl font-bold text-gray-900 dark:text-white bg-transparent placeholder-gray-200 dark:placeholder-gray-800"
+                className="text-2xl font-bold"
               />
             </div>
             {errors.amount && <InputError>{errors.amount.message}</InputError>}

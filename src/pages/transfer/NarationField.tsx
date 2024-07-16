@@ -1,5 +1,6 @@
 import InputError from 'components/InputError'
 import Label from 'components/Label'
+import Input from 'components/TextInput'
 import React from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Transfer } from 'utils/types'
@@ -22,7 +23,7 @@ const NarrationField: React.FC = () => {
             <Label htmlFor="narration" className="mb-1">
               Narration
             </Label>
-            <input
+            <Input
               type="text"
               {...field}
               id="narration"
@@ -30,7 +31,7 @@ const NarrationField: React.FC = () => {
                 field.onChange(e)
                 clearErrors('narration')
               }}
-              className="focus:outline-none w-full  p-0 focus:ring-0 border-none text-sm   text-gray-900  dark:text-white bg-transparent"
+              className="text-sm"
             />
             {errors.narration && (
               <InputError>{errors.narration.message}</InputError>

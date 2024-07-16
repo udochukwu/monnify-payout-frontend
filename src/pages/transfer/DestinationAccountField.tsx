@@ -1,5 +1,6 @@
 import InputError from 'components/InputError'
 import Label from 'components/Label'
+import Input from 'components/TextInput'
 import { Controller, useFormContext } from 'react-hook-form'
 import { Transfer } from 'utils/types'
 
@@ -33,7 +34,7 @@ const DestinationAccountField = ({
             <Label htmlFor="destinationAccountNumber" className="mb-1">
               Destination Account Number
             </Label>
-            <input
+            <Input
               type="text"
               id="destinationAccountNumber"
               placeholder="2254044924"
@@ -43,7 +44,7 @@ const DestinationAccountField = ({
                 field.onChange(value)
                 clearErrors('destinationAccountNumber')
               }}
-              className="focus:outline-none w-full p-0 focus:ring-0 border-none text-lg text-gray-900 bg-transparent placeholder-gray-200 focus:placeholder-gray-200"
+              className="text-lg"
             />
 
             {!!accountName && (

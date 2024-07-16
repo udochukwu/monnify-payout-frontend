@@ -1,32 +1,33 @@
-import React, { useState } from 'react';
-import TransferForm from './TransferForm';
-import AuthorizationForm from './AuthorizationForm';
-import { CreateTransferResponse, TRANSFERS_URL } from 'utils/actions';
-import { toast } from 'react-toastify';
-import { useQueryClient } from '@tanstack/react-query';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react'
+import TransferForm from './TransferForm'
+import AuthorizationForm from './AuthorizationForm'
+import { CreateTransferResponse, TRANSFERS_URL } from 'utils/actions'
+import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
+import Modal from 'components/Modal'
 
 const TransferPage = () => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   const [transferResponse, setTransferResponse] =
-    useState<CreateTransferResponse | null>(null);
+    useState<CreateTransferResponse | null>(null)
 
   const handleTransferSuccess = (response: CreateTransferResponse) => {
     if (response.responseBody.status === 'PENDING_AUTHORIZATION') {
-      setTransferResponse(response);
+      setTransferResponse(response)
     }
     queryClient.invalidateQueries({
       queryKey: [TRANSFERS_URL]
-    });
-  };
+    })
+  }
 
   const handleAuthorizationSuccess = () => {
-    toast?.success('Transfer successful');
-    setTransferResponse(null);
+    toast?.success('Transfer successful')
+    setTransferResponse(null)
     queryClient.invalidateQueries({
       queryKey: [TRANSFERS_URL]
-    });
-  };
+    })
+  }
 
   return (
     <div className="px-3 font-urbanist pt-4  dark:text-white">
@@ -64,8 +65,31 @@ const TransferPage = () => {
           />
         </div>
       )}
+      <Modal
+        isOpen={true}
+        onClose={() => {}}
+        title="Modal Title"
+        footer={
+          <div className="flex justify-end">
+            <button
+              onClick={() => {}}
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 mr-2"
+            >
+              Close
+            </button>
+            <button
+              onClick={() => alert('Action!')}
+              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+            >
+              Action
+            </button>
+          </div>
+        }
+      >
+        <p>This is the modal content.</p>
+      </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default TransferPage;
+export default TransferPage
