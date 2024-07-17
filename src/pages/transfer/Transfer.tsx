@@ -5,7 +5,6 @@ import { CreateTransferResponse, TRANSFERS_URL } from 'utils/actions'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import Modal from 'components/Modal'
 
 const TransferPage = () => {
   const queryClient = useQueryClient()
@@ -30,12 +29,12 @@ const TransferPage = () => {
   }
 
   return (
-    <div className="px-3 font-urbanist pt-4  dark:text-white">
+    <div className="px-3 pt-4 font-urbanist  dark:text-white">
       <div className="mb-10">
-        <h1 className="text-2xl font-bold tracking-wide text-gray-700 sm:text-2xl mb-2 dark:text-white">
+        <h1 className="mb-2 text-2xl font-bold tracking-wide text-gray-700 dark:text-white sm:text-2xl">
           Quick Transfer
         </h1>
-        <div className="flex gap-2 items-center text-gray-400 dark:text-gray-300">
+        <div className="flex items-center gap-2 text-gray-400 dark:text-gray-300">
           <Link to={'/'}>
             <p>Dashboard</p>
           </Link>
@@ -43,7 +42,7 @@ const TransferPage = () => {
             <svg
               viewBox="64 64 896 896"
               focusable="false"
-              className="w-4 h-4"
+              className="size-4"
               fill="currentColor"
               aria-hidden="true"
             >
@@ -54,40 +53,17 @@ const TransferPage = () => {
         </div>
       </div>
       {!transferResponse ? (
-        <div className="overflow-x-auto p-6 rounded bg-white dark:bg-dark px-5 sm:px-10 lg:px-20 xl:px-40 py-20  shadow-lg">
+        <div className="overflow-x-auto rounded bg-white p-6 px-5 py-20 shadow-lg dark:bg-dark sm:px-10 lg:px-20  xl:px-40">
           <TransferForm onSuccess={handleTransferSuccess} />
         </div>
       ) : (
-        <div className="overflow-x-auto p-6 shadow-sm rounded bg-white dark:bg-[#1D1E24]  px-5 sm:px-10 lg:px-20 xl:px-40 py-20 border border-gray-200">
+        <div className="overflow-x-auto rounded bg-white p-6 px-5 py-20 shadow-lg dark:bg-dark sm:px-10 lg:px-20  xl:px-40">
           <AuthorizationForm
             transferResponse={transferResponse}
             onSuccess={handleAuthorizationSuccess}
           />
         </div>
       )}
-      <Modal
-        isOpen={true}
-        onClose={() => {}}
-        title="Modal Title"
-        footer={
-          <div className="flex justify-end">
-            <button
-              onClick={() => {}}
-              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 mr-2"
-            >
-              Close
-            </button>
-            <button
-              onClick={() => alert('Action!')}
-              className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-            >
-              Action
-            </button>
-          </div>
-        }
-      >
-        <p>This is the modal content.</p>
-      </Modal>
     </div>
   )
 }

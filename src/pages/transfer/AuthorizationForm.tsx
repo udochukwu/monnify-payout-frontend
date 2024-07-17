@@ -7,16 +7,14 @@ import {
   useValidateBank
 } from 'utils/actions'
 import OTPInput from './OtpInput'
-import clsx from 'clsx'
 import { formatAmount } from 'utils'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { useQueryClient } from '@tanstack/react-query'
 import InputError from 'components/InputError'
 import Button from 'components/Button'
 interface AuthorizationFormProps {
   transferResponse: CreateTransferResponse
-  onSuccess: (result: any) => void
+  onSuccess: (result: unknown) => void
 }
 
 interface AuthorizationData {
@@ -36,7 +34,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
     handleSubmit,
     clearErrors,
     setValue,
-    formState: { errors, isValid }
+    formState: { isValid }
   } = useForm<AuthorizationData>({
     defaultValues: {
       authorizationCode: ''
@@ -84,12 +82,12 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
     })
   }
   return (
-    <form onSubmit={handleSubmit(onAuthorizeSubmit)} className="space-y-4 mt-8">
-      <h2 className="text-3xl text-gray-700 sm:text-3xl font-bold tracking-normal">
+    <form onSubmit={handleSubmit(onAuthorizeSubmit)} className="mt-8 space-y-4">
+      <h2 className="text-3xl font-bold tracking-normal text-gray-700 dark:text-white sm:text-3xl">
         Authorize transfer
       </h2>
 
-      <div className="text-gray-500 text-sm text-light">
+      <div className="text-sm text-gray-500 dark:text-gray-300">
         <p className="mb-2">
           You are about to transfer{' '}
           <b>{formatAmount(transferResponse?.responseBody?.amount)}</b> from{' '}
@@ -105,7 +103,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
       <div>
         <label
           htmlFor="authorizationCode"
-          className="block text-sm font-medium text-gray-700 mb-5"
+          className="mb-5 block text-sm font-medium text-gray-700 dark:text-white"
         >
           Authorization Code
         </label>
@@ -145,10 +143,10 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         </Button>
       </div>
       <p>
-        Didn't recieve code?{' '}
+        {"Didn't"} recieve code?{' '}
         <button
           type="button"
-          className="underline text-blue-600"
+          className="text-blue-600 underline"
           onClick={resendOtp}
         >
           Request again

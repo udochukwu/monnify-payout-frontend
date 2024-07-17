@@ -1,18 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, FormProvider, SubmitHandler } from 'react-hook-form'
 import AmountField from './AmountField'
 import DestinationAccountField from './DestinationAccountField'
-import { useCreateTransfer, useValidateBank } from 'utils/actions'
-import clsx from 'clsx'
+import {
+  CreateTransferResponse,
+  useCreateTransfer,
+  useValidateBank
+} from 'utils/actions'
 import { generateTransactionRef } from 'utils'
 import { Transfer } from 'utils/types'
 import DestinationBankField from './DestinationBank'
 import NarrationField from './NarationField'
 import { toast } from 'react-toastify'
 import Button from 'components/Button'
+import Modal from 'components/Modal'
 
 interface TransferFormProps {
-  onSuccess: (result: any) => void
+  onSuccess: (result: CreateTransferResponse) => void
 }
 
 const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
@@ -25,7 +29,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
     formState: { isValid }
   } = methods
   const mutation = useCreateTransfer()
-
+  const [showConfirmation, setShowConfirmation] = useState(false)
   const destinationBankCode = watch('destinationBankCode')
   const destinationAccountNumber = watch('destinationAccountNumber')
 
@@ -69,18 +73,36 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
           accountName={bankValidationData?.responseBody?.accountName}
         />
         <NarrationField />
-        <div className="flex gap-1 justify-between">
+        <div className="flex justify-between gap-1">
           <Button type="button" appearance="outline" color="red">
             Cancel
           </Button>
           <Button
-            type="submit"
+            type="button"
             disabled={isDisabled}
             loading={mutation?.status === 'pending'}
+            onClick={() => setShowConfirmation(true)}
           >
             Continue
           </Button>
         </div>
+        <Modal isOpen={showConfirmation}>
+          <p>This is the modal content.</p>
+          <div className="flex justify-end">
+            <button
+              onClick={() => setShowConfirmation(false)}
+              className="mr-2 rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+            >
+              Close
+            </button>
+            <button
+              onClick={() => alert('Action!')}
+              className="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+            >
+              Procced
+            </button>
+          </div>
+        </Modal>
       </form>
     </FormProvider>
   )
