@@ -30,6 +30,7 @@ export const generateTransactionRef = (): string => {
   return `${prefix}${year}${month}${day}${hour}${minute}${second}${millisecond}${randomDigits}${suffix}`
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const apiErrorHandler = (error: any, errorMessage?: string) => {
   const serverErrorMessage = error?.response?.data?.responseMessage
 

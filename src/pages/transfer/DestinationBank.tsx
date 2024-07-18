@@ -1,7 +1,7 @@
 import InputError from 'components/InputError'
 import Label from 'components/Label'
-import React from 'react'
-import { Controller, useFormContext } from 'react-hook-form'
+import React, { useEffect } from 'react'
+import { Controller, useFormContext, useWatch } from 'react-hook-form'
 import { useBanks } from 'utils/actions'
 import { Transfer } from 'utils/types'
 
@@ -9,10 +9,21 @@ const DestinationBankField: React.FC = () => {
   const {
     control,
     clearErrors,
+    setValue,
     formState: { errors }
   } = useFormContext<Transfer>()
   const { data, isLoading, error } = useBanks()
 
+  const destinationBankCode = useWatch({
+    name: 'destinationBankCode'
+  })
+
+  useEffect(() => {
+    const destinationBankName = data?.responseBody.find(
+      (bank) => bank?.code === destinationBankCode
+    )
+    setValue('destinationBankName', destinationBankName?.name || '')
+  }, [destinationBankCode, data?.responseBody, setValue])
   return (
     <div>
       <Controller
@@ -20,7 +31,7 @@ const DestinationBankField: React.FC = () => {
         control={control}
         rules={{ required: 'Destination bank code is required' }}
         render={({ field }) => (
-          <div className="w-full rounded border border-gray-200 dark:border-gray-700 focus-within:border-blue-200 p-4 h-24 flex flex-col justify-between">
+          <div className="flex h-24 w-full flex-col justify-between rounded border border-gray-200 p-4 focus-within:border-blue-200 dark:border-gray-700">
             <Label htmlFor="destinationBankCode" className="mb-1">
               Destination Bank
             </Label>
@@ -32,7 +43,7 @@ const DestinationBankField: React.FC = () => {
                   clearErrors('destinationBankCode')
                 }}
                 id="destinationBankCode"
-                className="block appearance-none w-full bg-transparent  text-gray-700 dark:text-white py-2  pr-8 rounded leading-tight focus:outline-none  focus:border-gray-500 text-sm cursor-pointer"
+                className="block w-full cursor-pointer appearance-none  rounded bg-transparent py-2  pr-8 text-sm leading-tight text-gray-700  focus:border-gray-500 focus:outline-none dark:text-white"
               >
                 <option value="">Select a bank</option>
                 {isLoading && <option>Loading...</option>}
@@ -47,7 +58,7 @@ const DestinationBankField: React.FC = () => {
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
-                  className="fill-current h-4 w-4"
+                  className="size-4 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
                 >

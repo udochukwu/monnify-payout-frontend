@@ -9,7 +9,7 @@ const Input = ({ className, ...rest }: InputProps) => {
   return (
     <input
       className={clsx(
-        'focus:outline-none w-full p-0 focus:ring-0 border-none text-gray-900 dark:text-white bg-transparent placeholder-gray-200 dark:placeholder-gray-700',
+        'w-full border-none bg-transparent p-0 text-gray-900 placeholder:text-gray-200 focus:outline-none focus:ring-0 dark:text-white dark:placeholder:text-gray-700',
         className
       )}
       {...rest}

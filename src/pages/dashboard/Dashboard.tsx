@@ -1,23 +1,20 @@
-import Avatar from 'components/Avatar'
-import logo from 'assets/logo.svg'
-import Template from 'components/Template'
 import { useWalletBalance } from 'utils/actions'
 import { formatAmount } from 'utils'
 import Transfers from 'pages/transfer/Transfers'
 
 function Dashboard() {
-  const { data, isLoading } = useWalletBalance(
+  const { data } = useWalletBalance(
     import.meta.env.VITE_MONNIFY_WALLET_ACCOUNT_NUMBER
   )
 
   return (
     <div className="relative overflow-hidden p-3 pb-10">
-      <h1 className="text-xl font-bold tracking-wide text-gray-700 dark:text-white sm:text-2xl mb-4 font-urbanist">
+      <h1 className="mb-4 font-urbanist text-xl font-bold tracking-wide text-gray-700 dark:text-white sm:text-2xl">
         Dashboard
       </h1>
 
-      <div className="flex gap-4 font-urbanist flex-col sm:flex-row mb-14 sm:mb-14">
-        <div className="w-full bg-white dark:bg-[#1D1E24] px-7 py-11 rounded shadow-lg flex gap-3 lg:w-1/2">
+      <div className="mb-14 flex flex-col gap-4 font-urbanist sm:mb-14 sm:flex-row">
+        <div className="flex w-full gap-3 rounded bg-white px-7 py-11 shadow-lg dark:bg-dark lg:w-1/2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="58"
@@ -65,8 +62,8 @@ function Dashboard() {
                 y2="45.3516"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#00B8C2"></stop>
-                <stop offset="1" stop-color="#005F7D"></stop>
+                <stop stopColor="#00B8C2"></stop>
+                <stop offset="1" stopColor="#005F7D"></stop>
               </linearGradient>
               <linearGradient
                 id="paint1_linear_22466_91730"
@@ -76,8 +73,8 @@ function Dashboard() {
                 y2="27.5268"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#F0AA22"></stop>
-                <stop offset="1" stop-color="#F05822"></stop>
+                <stop stopColor="#F0AA22"></stop>
+                <stop offset="1" stopColor="#F05822"></stop>
               </linearGradient>
               <linearGradient
                 id="paint2_linear_22466_91730"
@@ -87,8 +84,8 @@ function Dashboard() {
                 y2="27.5268"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#F0AA22"></stop>
-                <stop offset="1" stop-color="#F05822"></stop>
+                <stop stopColor="#F0AA22"></stop>
+                <stop offset="1" stopColor="#F05822"></stop>
               </linearGradient>
               <linearGradient
                 id="paint3_linear_22466_91730"
@@ -98,17 +95,17 @@ function Dashboard() {
                 y2="27.5268"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#F0AA22"></stop>
-                <stop offset="1" stop-color="#F05822"></stop>
+                <stop stopColor="#F0AA22"></stop>
+                <stop offset="1" stopColor="#F05822"></stop>
               </linearGradient>
             </defs>
           </svg>
           <div>
             {' '}
-            <p className="text-gray-500 dark:text-gray-400 tracking-widest text-sm">
+            <p className="text-sm tracking-widest text-gray-500 dark:text-gray-400">
               Available Balance
             </p>
-            <h4 className="font-bold text-2xl text-gray-800 dark:text-white">
+            <h4 className="text-2xl font-bold text-gray-800 dark:text-white">
               {data?.responseBody?.availableBalance
                 ? formatAmount(data?.responseBody?.availableBalance)
                 : formatAmount(0)}

@@ -189,11 +189,7 @@ export const useCreateTransfer = () => {
 
 export const useTransfers = (paginationParams: PaginationParams) => {
   return useQuery({
-    queryKey: [
-      TRANSFERS_URL,
-      paginationParams?.pageNo,
-      paginationParams?.pageSize
-    ],
+    queryKey: [TRANSFERS_URL, paginationParams],
     queryFn: () => getTransfersApi(paginationParams)
   })
 }

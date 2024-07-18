@@ -15,6 +15,18 @@ const Transfers = () => {
     PENDING_AUTHORIZATION: 'bg-orange-200 text-orange-500'
   }
 
+  const TableHeader = () => (
+    <thead>
+      <tr className="bg-gray-50 dark:bg-[#23262B]">
+        <th className="px-4 py-5 text-start">Amount</th>
+        <th className="px-4 py-5 text-start">Destination Account</th>
+        <th className="px-4 py-5 text-start">Reference</th>
+        <th className="px-4 py-5 text-start">Transfer Date</th>
+        <th className="px-4 py-5 text-start">Status</th>
+      </tr>
+    </thead>
+  )
+
   const skeletonRows = Array.from({ length: 5 }).map((_, index) => (
     <tr
       key={index}
@@ -52,30 +64,14 @@ const Transfers = () => {
       <div className="min-h-96 overflow-auto rounded-sm bg-white p-6 shadow-lg dark:bg-dark">
         {isLoading ? (
           <table className="w-full min-w-full whitespace-nowrap font-urbanist text-sm text-black dark:text-white">
-            <thead>
-              <tr className="bg-gray-50 dark:bg-[#23262B]">
-                <th className="px-4 py-5 text-start">Amount</th>
-                <th className="px-4 py-5 text-start">Destination Account</th>
-                <th className="px-4 py-5 text-start">Reference</th>
-                <th className="px-4 py-5 text-start">Transfer Date</th>
-                <th className="px-4 py-5 text-start">Status</th>
-              </tr>
-            </thead>
+            <TableHeader />
             <tbody className="font-semibold">{skeletonRows}</tbody>
           </table>
         ) : (
           data &&
           data?.requestSuccessful && (
             <table className="w-full min-w-full whitespace-nowrap font-urbanist text-sm text-black dark:text-white">
-              <thead>
-                <tr className="bg-gray-50 dark:bg-[#23262B]">
-                  <th className="px-4 py-5 text-start">Amount</th>
-                  <th className="px-4 py-5 text-start">Destination Account</th>
-                  <th className="px-4 py-5 text-start">Reference</th>
-                  <th className="px-4 py-5 text-start">Transfer Date</th>
-                  <th className="px-4 py-5 text-start">Status</th>
-                </tr>
-              </thead>
+              <TableHeader />
               <tbody className="font-semibold">
                 {data?.responseBody.content.map((transfer, index) => (
                   <tr

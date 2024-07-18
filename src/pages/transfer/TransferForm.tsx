@@ -7,7 +7,7 @@ import {
   useCreateTransfer,
   useValidateBank
 } from 'utils/actions'
-import { generateTransactionRef } from 'utils'
+import { formatAmount, generateTransactionRef } from 'utils'
 import { Transfer } from 'utils/types'
 import DestinationBankField from './DestinationBank'
 import NarrationField from './NarationField'
@@ -32,12 +32,13 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
   const [showConfirmation, setShowConfirmation] = useState(false)
   const destinationBankCode = watch('destinationBankCode')
   const destinationAccountNumber = watch('destinationAccountNumber')
+  const amount = watch('amount')
+  const destinationBankName = watch('destinationBankName')
 
-  const { data: bankValidationData, isLoading: isValidationDataLoading } =
-    useValidateBank({
-      bankCode: destinationBankCode,
-      accountNumber: destinationAccountNumber
-    })
+  const { data: bankValidationData } = useValidateBank({
+    bankCode: destinationBankCode,
+    accountNumber: destinationAccountNumber
+  })
 
   const onSubmit: SubmitHandler<Transfer> = (data) => {
     mutation.mutate(
@@ -49,7 +50,6 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
       },
       {
         onSuccess: (result) => {
-          console.log('Transfer created:', result)
           onSuccess(result)
         },
         onError: (error) => {
@@ -60,8 +60,8 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
   }
 
   const isDisabled =
-    !bankValidationData?.requestSuccessful ||
-    isValidationDataLoading ||
+    // !bankValidationData?.requestSuccessful ||
+    // isValidationDataLoading ||
     !isValid
 
   return (
@@ -87,17 +87,24 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
           </Button>
         </div>
         <Modal isOpen={showConfirmation}>
-          <p>This is the modal content.</p>
-          <div className="flex justify-end">
+          <p className="mb-5">
+            You are about to transfer <b>{formatAmount(amount)}</b> from{' '}
+            <b>{import.meta.env.VITE_MONNIFY_WALLET_ACCOUNT_NUMBER}</b> to{' '}
+            <b>
+              {bankValidationData?.responseBody?.accountName} (
+              {destinationBankName}) - {destinationAccountNumber}
+            </b>
+          </p>
+          <div className="flex justify-between">
             <button
               onClick={() => setShowConfirmation(false)}
-              className="mr-2 rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+              className="mr-2 w-full rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
             >
               Close
             </button>
             <button
-              onClick={() => alert('Action!')}
-              className="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+              type="submit"
+              className="w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
             >
               Procced
             </button>

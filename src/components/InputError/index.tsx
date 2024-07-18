@@ -7,7 +7,7 @@ type InputErrorProps = {
 
 const InputError = ({ children, className, ...rest }: InputErrorProps) => {
   return (
-    <span className={clsx('text-red-400 text-xs', className)} {...rest}>
+    <span className={clsx('text-xs text-red-400', className)} {...rest}>
       {children}
     </span>
   )
