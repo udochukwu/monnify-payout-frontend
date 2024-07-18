@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
-import TransferForm from './TransferForm'
-import AuthorizationForm from './AuthorizationForm'
+import TransferForm from './pageComponents/TransferForm'
+import AuthorizationForm from './pageComponents/AuthorizationForm'
 import { CreateTransferResponse, TRANSFERS_URL } from 'utils/actions'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
+import TransferSuccess from './pageComponents/TransferSuccess'
 
 const TransferPage = () => {
   const queryClient = useQueryClient()
   const [transferResponse, setTransferResponse] =
     useState<CreateTransferResponse | null>(null)
-
+  const [showConfirmation, setShowConfirmation] = useState(false)
   const handleTransferSuccess = (response: CreateTransferResponse) => {
     if (response.responseBody.status === 'PENDING_AUTHORIZATION') {
       setTransferResponse(response)
@@ -21,8 +22,8 @@ const TransferPage = () => {
   }
 
   const handleAuthorizationSuccess = () => {
+    setShowConfirmation(true)
     toast?.success('Transfer successful')
-    setTransferResponse(null)
     queryClient.invalidateQueries({
       queryKey: [TRANSFERS_URL]
     })
@@ -30,7 +31,7 @@ const TransferPage = () => {
 
   return (
     <div className="px-3 pt-4 font-urbanist  dark:text-white">
-      <div className="mb-10">
+      <div className="mb-10 items-center justify-between sm:flex">
         <h1 className="mb-2 text-2xl font-bold tracking-wide text-gray-700 dark:text-white sm:text-2xl">
           Quick Transfer
         </h1>
@@ -52,18 +53,18 @@ const TransferPage = () => {
           <p className="text-blue-400">Quick Transfer</p>
         </div>
       </div>
-      {!transferResponse ? (
-        <div className="overflow-x-auto rounded bg-white p-6 px-5 py-20 shadow-lg dark:bg-dark sm:px-10 lg:px-20  xl:px-40">
+      <div className="overflow-x-auto rounded bg-white p-6 px-5 py-20 shadow-lg dark:bg-dark sm:px-10  lg:px-20 xl:px-40">
+        {showConfirmation && transferResponse ? (
+          <TransferSuccess transferResponse={transferResponse} />
+        ) : !transferResponse ? (
           <TransferForm onSuccess={handleTransferSuccess} />
-        </div>
-      ) : (
-        <div className="overflow-x-auto rounded bg-white p-6 px-5 py-20 shadow-lg dark:bg-dark sm:px-10 lg:px-20  xl:px-40">
+        ) : (
           <AuthorizationForm
             transferResponse={transferResponse}
             onSuccess={handleAuthorizationSuccess}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

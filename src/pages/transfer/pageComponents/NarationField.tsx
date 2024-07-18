@@ -19,7 +19,7 @@ const NarrationField: React.FC = () => {
         control={control}
         rules={{ required: 'Narration is required' }}
         render={({ field }) => (
-          <div className="w-full rounded border border-gray-200 dark:border-gray-700  focus-within:border-blue-200 p-4 h-24 flex flex-col justify-between">
+          <div className="flex h-24 w-full flex-col justify-between  rounded border border-gray-200 p-4 focus-within:border-blue-200 dark:border-gray-700">
             <Label htmlFor="narration" className="mb-1">
               Narration
             </Label>

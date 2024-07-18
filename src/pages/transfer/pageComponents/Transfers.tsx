@@ -89,9 +89,11 @@ const Transfers = () => {
                       <span className="block text-black dark:text-white">
                         {transfer.destinationAccountNumber}
                       </span>
-                      <span className="block text-gray-500 dark:text-gray-400">
-                        ({transfer.destinationBankName})
-                      </span>
+                      {transfer.destinationBankName && (
+                        <span className="block text-gray-500 dark:text-gray-400">
+                          ({transfer.destinationBankName})
+                        </span>
+                      )}
                     </td>
                     <td className="px-4 py-5 text-sm">{transfer.reference}</td>
                     <td className="px-4 py-5 text-gray-700 dark:text-gray-400">

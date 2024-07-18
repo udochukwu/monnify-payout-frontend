@@ -60,7 +60,6 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
       {
         onSuccess: (result) => {
           onSuccess(result)
-          navigate('/')
         },
         onError: (error) => {
           toast?.error(error?.message)
@@ -130,13 +129,20 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
       </div>
 
       <div className="flex gap-2 sm:!mt-10">
-        <Button appearance="outline" onClick={() => navigate('/')} color="red">
+        <Button
+          appearance="outline"
+          onClick={() => navigate('/')}
+          color="red"
+          className="w-40"
+          disabled={authorizeMutation?.status === 'pending'}
+        >
           Cancel
         </Button>
         <Button
           appearance="solid"
           type="submit"
           disabled={!isValid}
+          className="w-40"
           loading={authorizeMutation?.status === 'pending'}
         >
           Authorize

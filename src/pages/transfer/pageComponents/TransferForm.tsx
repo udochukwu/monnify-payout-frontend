@@ -13,7 +13,7 @@ import DestinationBankField from './DestinationBank'
 import NarrationField from './NarationField'
 import { toast } from 'react-toastify'
 import Button from 'components/Button'
-import Modal from 'components/Modal'
+import ConfirmationModal from 'components/ConfirmationModal'
 
 interface TransferFormProps {
   onSuccess: (result: CreateTransferResponse) => void
@@ -59,10 +59,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
     )
   }
 
-  const isDisabled =
-    // !bankValidationData?.requestSuccessful ||
-    // isValidationDataLoading ||
-    !isValid
+  const isDisabled = !isValid
 
   return (
     <FormProvider {...methods}>
@@ -74,42 +71,40 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
         />
         <NarrationField />
         <div className="flex justify-between gap-1">
-          <Button type="button" appearance="outline" color="red">
+          <Button
+            type="button"
+            appearance="outline"
+            color="red"
+            className="w-32 sm:w-52"
+            disabled={isDisabled}
+          >
             Cancel
           </Button>
           <Button
             type="button"
             disabled={isDisabled}
-            loading={mutation?.status === 'pending'}
             onClick={() => setShowConfirmation(true)}
+            className="w-32 sm:w-52"
           >
             Continue
           </Button>
         </div>
-        <Modal isOpen={showConfirmation}>
+        <ConfirmationModal
+          isOpen={showConfirmation}
+          onCancel={() => setShowConfirmation(false)}
+          onProceed={handleSubmit(onSubmit)}
+          loading={mutation?.status === 'pending'}
+        >
           <p className="mb-5">
             You are about to transfer <b>{formatAmount(amount)}</b> from{' '}
             <b>{import.meta.env.VITE_MONNIFY_WALLET_ACCOUNT_NUMBER}</b> to{' '}
             <b>
-              {bankValidationData?.responseBody?.accountName} (
-              {destinationBankName}) - {destinationAccountNumber}
+              {bankValidationData?.responseBody?.accountName}{' '}
+              {destinationBankName && `${destinationBankName}`} -{' '}
+              {destinationAccountNumber}
             </b>
           </p>
-          <div className="flex justify-between">
-            <button
-              onClick={() => setShowConfirmation(false)}
-              className="mr-2 w-full rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700"
-            >
-              Close
-            </button>
-            <button
-              type="submit"
-              className="w-full rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
-            >
-              Procced
-            </button>
-          </div>
-        </Modal>
+        </ConfirmationModal>
       </form>
     </FormProvider>
   )

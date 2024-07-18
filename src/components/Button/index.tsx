@@ -1,9 +1,12 @@
 import React from 'react'
 import clsx from 'clsx'
+import LoadingSpinnerIcon from 'components/icons/LoadingSpinnerIcon'
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   appearance?: 'solid' | 'outline' | 'text'
-  color?: 'blue' | 'red'
+  color?: 'blue' | 'red' | 'green'
+  size?: 'sm' | 'md' | 'lg'
   loading?: boolean
   disabled?: boolean
 }
@@ -11,6 +14,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<ButtonProps> = ({
   appearance = 'solid',
   color = 'blue',
+  size = 'md',
   className,
   children,
   disabled,
@@ -18,7 +22,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    'justify-center px-4 border shadow-sm text-sm font-medium rounded focus:outline-none focus:ring-2 focus:ring-offset-2 h-14 flex items-center w-full sm:w-60'
+    'justify-center border shadow-sm text-sm font-medium rounded focus:outline-none focus:ring-2 focus:ring-offset-2 flex items-center'
 
   const colorStyles = {
     blue: {
@@ -34,41 +38,39 @@ const Button: React.FC<ButtonProps> = ({
       outline:
         'bg-transparent text-red-600 border-red-600 hover:bg-red-50 focus:ring-red-500',
       text: 'bg-transparent text-red-600 border-transparent hover:bg-red-50 focus:ring-red-500 inline-flex'
+    },
+    green: {
+      solid:
+        'bg-green-600 text-white border-transparent hover:bg-green-700 focus:ring-green-500',
+      outline:
+        'bg-transparent text-green-600 border-green-600 hover:bg-green-50 focus:ring-green-500',
+      text: 'bg-transparent text-green-600 border-transparent hover:bg-green-50 focus:ring-green-500 inline-flex'
     }
+  }
+
+  const sizeStyles = {
+    sm: 'px-2 py-1 h-10 text-xs',
+    md: 'px-4 py-2 h-14 text-sm',
+    lg: 'px-6 py-3 h-16 text-lg'
   }
 
   const disabledStyles = 'cursor-not-allowed opacity-50'
 
   return (
     <button
-      className={clsx(baseStyles, colorStyles[color][appearance], className, {
-        [disabledStyles]: disabled
-      })}
+      className={clsx(
+        baseStyles,
+        colorStyles[color][appearance],
+        sizeStyles[size],
+        className,
+        {
+          [disabledStyles]: disabled
+        }
+      )}
       disabled={disabled}
       {...props}
     >
-      {loading && (
-        <svg
-          className="mr-3 size-5 animate-spin text-white dark:text-gray-800" // Adjust spinner color for dark mode
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            className="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            strokeWidth="4"
-          />
-          <path
-            className="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8V0C6.48 0 2 4.48 2 10h2zm2 5.3a7.97 7.97 0 01-1.33-3.27l-2 .42c.32 1.44.96 2.73 1.82 3.83l1.51-1.03z"
-          />
-        </svg>
-      )}
+      {loading && <LoadingSpinnerIcon />}
       {children}
     </button>
   )
