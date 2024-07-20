@@ -1,8 +1,6 @@
-![reactjs-vite-tailwindcss-boilerplate](https://user-images.githubusercontent.com/16243531/217138979-b854309c-4742-4275-a705-f9fec5158217.jpg)
+# Monnify Payout API Frontend
 
-# React Tailwindcss Boilerplate build with Vite
-
-This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.
+This is a simple user-friendly and secure front-end interface for initiating payouts, including form validation, integration with Monnitfy  APIs, and user feedback mechanisms using ReactJS and TailwindCSS.
 
 ## What is inside?
 
@@ -14,67 +12,63 @@ This project uses many tools like:
 - [Vitest](https://vitest.dev)
 - [Testing Library](https://testing-library.com)
 - [Tailwindcss](https://tailwindcss.com)
-- [Eslint](https://eslint.org)
-- [Prettier](https://prettier.io)
+- [Cypress](https://cypress.io)
+
 
 ## Getting Started
 
 ### Install
 
-Create the project.
+Clone the project.
 
 ```bash
-npx degit joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate my-app
+git clone https://github.com/udochukwu/monnify-payout-frontend.git
 ```
 
-Access the project directory.
+Move to directory.
 
 ```bash
-cd my-app
+cd monnify-payout-frontend
 ```
 
 Install dependencies.
 
 ```bash
-pnpm install
+npm install
 ```
 
-Serve with hot reload at <http://localhost:5173>.
+Serve with hot reload at <http://localhost:3002>.
 
 ```bash
-pnpm run dev
+npm run dev
 ```
 
 ### Lint
 
 ```bash
-pnpm run lint
+npm run lint
 ```
 
 ### Typecheck
 
 ```bash
-pnpm run typecheck
+npm run typecheck
 ```
 
 ### Build
 
 ```bash
-pnpm run build
+ppm run build
 ```
 
 ### Test
 
 ```bash
-pnpm run test
+npm run test
 ```
 
 View and interact with your tests via UI.
 
 ```bash
-pnpm run test:ui
+npm run test:ui
 ```
-
-## License
-
-This project is licensed under the MIT License.
