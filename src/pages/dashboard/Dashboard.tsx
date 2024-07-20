@@ -9,7 +9,7 @@ function Dashboard() {
   )
 
   return (
-    <div className="relative overflow-hidden p-3 pb-10">
+    <div className="relative overflow-hidden p-3 pb-10" id="dashboardPage">
       <h1 className="mb-4 font-urbanist text-xl font-bold tracking-wide text-gray-700 dark:text-white sm:text-2xl">
         Dashboard
       </h1>

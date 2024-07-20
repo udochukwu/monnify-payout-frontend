@@ -30,7 +30,7 @@ const TransferPage = () => {
   }
 
   return (
-    <div className="px-3 pt-4 font-urbanist  dark:text-white">
+    <div className="px-3 pt-4 font-urbanist  dark:text-white" id="transferPage">
       <div className="mb-10 items-center justify-between sm:flex">
         <h1 className="mb-2 text-2xl font-bold tracking-wide text-gray-700 dark:text-white sm:text-2xl">
           Quick Transfer

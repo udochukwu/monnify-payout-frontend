@@ -14,6 +14,7 @@ import NarrationField from './NarationField'
 import { toast } from 'react-toastify'
 import Button from 'components/Button'
 import ConfirmationModal from 'components/ConfirmationModal'
+import { Link } from 'react-router-dom'
 
 interface TransferFormProps {
   onSuccess: (result: CreateTransferResponse) => void
@@ -71,20 +72,22 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
         />
         <NarrationField />
         <div className="flex justify-between gap-1">
-          <Button
-            type="button"
-            appearance="outline"
-            color="red"
-            className="w-32 sm:w-52"
-            disabled={isDisabled}
-          >
-            Cancel
-          </Button>
+          <Link to="/">
+            <Button
+              type="button"
+              appearance="outline"
+              color="red"
+              className="w-32 sm:w-52"
+            >
+              Cancel
+            </Button>
+          </Link>
           <Button
             type="button"
             disabled={isDisabled}
             onClick={() => setShowConfirmation(true)}
             className="w-32 sm:w-52"
+            id="continueTransfer"
           >
             Continue
           </Button>
@@ -94,6 +97,7 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
           onCancel={() => setShowConfirmation(false)}
           onProceed={handleSubmit(onSubmit)}
           loading={mutation?.status === 'pending'}
+          id="confirmTransfer"
         >
           <p className="mb-5">
             You are about to transfer <b>{formatAmount(amount)}</b> from{' '}

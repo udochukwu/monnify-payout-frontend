@@ -11,7 +11,7 @@ const TransferSuccess = ({
   transferResponse: CreateTransferResponse
 }) => {
   return (
-    <div className="text-center">
+    <div className="text-center" id="transferSuccess">
       <div className="flex justify-center">
         <SuccessIcon />
       </div>

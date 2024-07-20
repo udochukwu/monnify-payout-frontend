@@ -81,7 +81,11 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
     })
   }
   return (
-    <form onSubmit={handleSubmit(onAuthorizeSubmit)} className="mt-8 space-y-4">
+    <form
+      onSubmit={handleSubmit(onAuthorizeSubmit)}
+      className="mt-8 space-y-4"
+      id="authorizationForm"
+    >
       <h2 className="text-3xl font-bold tracking-normal text-gray-700 dark:text-white sm:text-3xl">
         Authorize transfer
       </h2>
@@ -131,10 +135,12 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
       <div className="flex gap-2 sm:!mt-10">
         <Button
           appearance="outline"
+          type="reset"
           onClick={() => navigate('/')}
           color="red"
           className="w-40"
           disabled={authorizeMutation?.status === 'pending'}
+          id="cancelAuthorizationBtn"
         >
           Cancel
         </Button>
@@ -144,6 +150,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
           disabled={!isValid}
           className="w-40"
           loading={authorizeMutation?.status === 'pending'}
+          id="authorizeBtn"
         >
           Authorize
         </Button>

@@ -25,6 +25,7 @@ function Root() {
               <Link
                 to={`transfer`}
                 className="text-black hover:text-gray-700 dark:text-white dark:hover:text-gray-300"
+                id="transferLink"
               >
                 Quick Transfer
               </Link>
