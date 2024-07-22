@@ -21,6 +21,7 @@ interface TransferFormProps {
 }
 
 const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
+  // Initialize react-hook-form methods
   const methods = useForm<Transfer>({
     mode: 'onBlur'
   })
@@ -29,18 +30,26 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
     watch,
     formState: { isValid }
   } = methods
+
+  // Hook for creating a transfer
   const mutation = useCreateTransfer()
+
+  // State to control the visibility of the confirmation modal
   const [showConfirmation, setShowConfirmation] = useState(false)
+
+  // Watch form fields to get their current values
   const destinationBankCode = watch('destinationBankCode')
   const destinationAccountNumber = watch('destinationAccountNumber')
   const amount = watch('amount')
   const destinationBankName = watch('destinationBankName')
 
+  // Hook for validating the bank details
   const { data: bankValidationData } = useValidateBank({
     bankCode: destinationBankCode,
     accountNumber: destinationAccountNumber
   })
 
+  // Handler for form submission
   const onSubmit: SubmitHandler<Transfer> = (data) => {
     mutation.mutate(
       {
@@ -60,17 +69,21 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
     )
   }
 
+  // Disable the Continue button if the form is not valid
   const isDisabled = !isValid
 
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* Form fields for amount, destination bank, account, and narration */}
         <AmountField />
         <DestinationBankField />
         <DestinationAccountField
           accountName={bankValidationData?.responseBody?.accountName}
         />
         <NarrationField />
+
+        {/* Buttons for cancel and continue */}
         <div className="flex justify-between gap-1">
           <Link to="/">
             <Button
@@ -92,6 +105,8 @@ const TransferForm: React.FC<TransferFormProps> = ({ onSuccess }) => {
             Continue
           </Button>
         </div>
+
+        {/* Confirmation modal for transfer details */}
         <ConfirmationModal
           isOpen={showConfirmation}
           onCancel={() => setShowConfirmation(false)}

@@ -9,21 +9,31 @@ import TransferSuccess from './pageComponents/TransferSuccess'
 
 const TransferPage = () => {
   const queryClient = useQueryClient()
+
+  // State to hold the response of the transfer creation
   const [transferResponse, setTransferResponse] =
     useState<CreateTransferResponse | null>(null)
+
+  // State to control the visibility of the transfer success confirmation
   const [showConfirmation, setShowConfirmation] = useState(false)
+
+  // Handler for successful transfer creation
   const handleTransferSuccess = (response: CreateTransferResponse) => {
+    // If the transfer is pending authorization, set the transfer response state
     if (response.responseBody.status === 'PENDING_AUTHORIZATION') {
       setTransferResponse(response)
     }
+    // Invalidate the transfers query to refresh the data
     queryClient.invalidateQueries({
       queryKey: [TRANSFERS_URL]
     })
   }
 
+  // Handler for successful authorization
   const handleAuthorizationSuccess = () => {
     setShowConfirmation(true)
     toast?.success('Transfer successful')
+    // Invalidate the transfers query to refresh the data
     queryClient.invalidateQueries({
       queryKey: [TRANSFERS_URL]
     })
@@ -53,12 +63,16 @@ const TransferPage = () => {
           <p className="text-blue-400">Quick Transfer</p>
         </div>
       </div>
+
       <div className="overflow-x-auto rounded bg-white p-6 px-5 py-20 shadow-lg dark:bg-dark sm:px-10  lg:px-20 xl:px-40">
         {showConfirmation && transferResponse ? (
+          // If the transfer is successful and confirmation is shown, display the TransferSuccess component
           <TransferSuccess transferResponse={transferResponse} />
         ) : !transferResponse ? (
+          // If no transfer response, display the TransferForm component
           <TransferForm onSuccess={handleTransferSuccess} />
         ) : (
+          // If transfer response is pending authorization, display the AuthorizationForm component
           <AuthorizationForm
             transferResponse={transferResponse}
             onSuccess={handleAuthorizationSuccess}

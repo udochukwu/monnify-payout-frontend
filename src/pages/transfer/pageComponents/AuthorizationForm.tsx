@@ -12,6 +12,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import InputError from 'components/InputError'
 import Button from 'components/Button'
+
 interface AuthorizationFormProps {
   transferResponse: CreateTransferResponse
   onSuccess: (result: unknown) => void
@@ -26,9 +27,12 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
   onSuccess
 }) => {
   const navigate = useNavigate()
+
+  // Hooks for authorizing transfer and resending OTP
   const authorizeMutation = useAuthorizeTransfer()
   const resendOtpMutation = useResendOtp()
 
+  // Initialize react-hook-form methods
   const {
     control,
     handleSubmit,
@@ -42,11 +46,13 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
     mode: 'onBlur'
   })
 
+  // Hook for validating the bank details
   const { data: bankValidationData } = useValidateBank({
     bankCode: transferResponse?.responseBody?.destinationBankCode,
     accountNumber: transferResponse?.responseBody?.destinationAccountNumber
   })
 
+  // Handler for form submission
   const onAuthorizeSubmit: SubmitHandler<AuthorizationData> = (
     authorizationData
   ) => {
@@ -69,6 +75,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
     )
   }
 
+  // Handler for resending OTP
   const resendOtp = () => {
     resendOtpMutation.mutate(transferResponse?.responseBody?.reference, {
       onSuccess: (result) => {
@@ -80,6 +87,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
       }
     })
   }
+
   return (
     <form
       onSubmit={handleSubmit(onAuthorizeSubmit)}
@@ -133,6 +141,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
       </div>
 
       <div className="flex gap-2 sm:!mt-10">
+        {/* Cancel button */}
         <Button
           appearance="outline"
           type="reset"
@@ -144,6 +153,8 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         >
           Cancel
         </Button>
+
+        {/* Authorize button */}
         <Button
           appearance="solid"
           type="submit"
@@ -156,7 +167,7 @@ const AuthorizationForm: React.FC<AuthorizationFormProps> = ({
         </Button>
       </div>
       <p>
-        {"Didn't"} recieve code?{' '}
+        {"Didn't"} receive code?{' '}
         <button
           type="button"
           className="text-blue-600 underline"
