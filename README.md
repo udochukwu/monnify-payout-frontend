@@ -2,6 +2,11 @@
 
 This is a simple user-friendly and secure front-end interface for initiating payouts, including form validation, integration with Monnitfy  APIs, and user feedback mechanisms using ReactJS and TailwindCSS.
 
+
+## Live Demo
+Check out the live demo [here](https://monnify-payout-frontend.vercel.app/)
+
+
 ## What is inside?
 
 This project uses many tools like:
@@ -17,15 +22,15 @@ This project uses many tools like:
 
 ## Getting Started
 
-### Install
+### Installation
 
-Clone the project.
+Clone the repository:
 
 ```bash
 git clone https://github.com/udochukwu/monnify-payout-frontend.git
 ```
 
-Move to directory.
+Navigate to the project directory:
 
 ```bash
 cd monnify-payout-frontend
