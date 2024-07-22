@@ -10,8 +10,14 @@ function Root() {
         <nav className=" mx-auto flex w-full max-w-7xl items-center justify-between px-4 sm:px-9">
           <div className="shrink-0">
             <Link to="/">
-              <img className="h-8 dark:hidden sm:h-10" src={logo} />
-              <img className="hidden  h-8 dark:inline sm:h-10" src={logoDark} />
+              <img
+                className="h-8 w-24 dark:hidden sm:h-10 sm:w-32"
+                src={logo}
+              />
+              <img
+                className="hidden  h-8 w-24 dark:inline sm:h-10 sm:w-32"
+                src={logoDark}
+              />
             </Link>
           </div>
           <ul className="flex space-x-4 font-semibold">
