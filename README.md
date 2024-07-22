@@ -61,7 +61,7 @@ npm run typecheck
 ppm run build
 ```
 
-### Test
+### Test (Unit & Integration)
 
 ```bash
 npm run test
@@ -71,4 +71,10 @@ View and interact with your tests via UI.
 
 ```bash
 npm run test:ui
+```
+
+### End to end test using Cypress
+
+```bash
+npx cypress open
 ```
