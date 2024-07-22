@@ -1,4 +1,5 @@
 import logo from 'assets/logo.png'
+import logoDark from 'assets/logo-dark.png'
 import { Link, Outlet } from 'react-router-dom'
 import ThemeToggleButton from 'components/ThemeToggleButton'
 
@@ -9,7 +10,8 @@ function Root() {
         <nav className=" mx-auto flex w-full max-w-7xl items-center justify-between px-4 sm:px-9">
           <div className="shrink-0">
             <Link to="/">
-              <img className="h-8 sm:h-10" src={logo} />
+              <img className="h-8 dark:hidden sm:h-10" src={logo} />
+              <img className="hidden  h-8 dark:inline sm:h-10" src={logoDark} />
             </Link>
           </div>
           <ul className="flex space-x-4 font-semibold">
