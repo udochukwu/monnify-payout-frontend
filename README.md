@@ -1,8 +1,6 @@
 # Monnify Payout API Frontend
 
-This is a simple user-friendly and secure front-end interface for initiating payouts, including form validation, integration with Monnitfy  APIs, and user feedback mechanisms using ReactJS and TailwindCSS.
-
-
+This is a simple user-friendly and secure front-end interface for initiating payouts using Monnify.
 ## Live Demo
 Check out the live demo [here](https://monnify-payout-frontend.vercel.app/)
 
